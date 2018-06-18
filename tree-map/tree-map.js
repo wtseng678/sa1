@@ -33,5 +33,15 @@ var Tree = function(value) {
   this.children = [];
 };
 
+Tree.prototype.map = function(mapper) {
+  var node = arguments[1] || new Tree(mapper(this.value));
+  this.children.forEach(function(tree, i) {
+    node.addChild(mapper(tree.value));
+    if (tree.children.length) {
+      tree.map(mapper, node.children[i]);
+    }
+  });
+  return node; 
+};
 
-
+// tree-map: complete
