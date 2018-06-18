@@ -35,10 +35,10 @@ var Tree = function(value) {
 
 Tree.prototype.map = function(mapper) {
   var node = arguments[1] || new Tree(mapper(this.value));
-  this.children.forEach(function(this, i) {
-    node.addChild(mapper(this.value));
-    if (this.children.length) {
-      this.map(mapper, node.children[i]);
+  this.children.forEach(function(tree, i) {
+    node.addChild(mapper(tree.value));
+    if (tree.children.length) {
+      tree.map(mapper, node.children[i]);
     }
   });
   return node; 
